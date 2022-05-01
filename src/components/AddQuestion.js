@@ -1,27 +1,42 @@
-import { useRef, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import { QuestionItem } from "./QuestionItem";
+import { formIntialState, formReducer } from "./formReducer";
 import styles from "./styles/AddQuestion.module.css";
 
 export const AddQuestion = () => {
   const [isInvalid, setInvalidity] = useState(false);
-  let questionData = [{}, {}];
+  const [state, dispatch] = useReducer(formReducer, formIntialState);
+
   const formRef = useRef();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formRef.current.checkValidity());
     if (!formRef.current.checkValidity()) {
       setInvalidity(true);
+    } else {
+      setInvalidity(false);
+      console.log(state);
     }
+
+    // dispatch({ type: "ADD" });
   };
 
   return (
     <form className={styles.questions} ref={formRef}>
       <input type="date" required className={styles.date} />
-      {questionData.map((item, index) => {
-        return <QuestionItem qNumber={index + 1} isInvalid={isInvalid} />;
+      {state.questions.map((item, index) => {
+        return (
+          <QuestionItem
+            key={item.id}
+            id={item.id}
+            qNumber={index + 1}
+            isInvalid={isInvalid}
+            dispatch={dispatch}
+            index={index}
+          />
+        );
       })}
-      <button type="submit" onClick={onSubmit}></button>
+      <button onClick={onSubmit}></button>
     </form>
   );
 };
