@@ -1,0 +1,16 @@
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 34em;
+  max-width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 0.8em 0.5em;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+}
+
+.input:focus:invalid {
+  border: 2px solid red;
+}
