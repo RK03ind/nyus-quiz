@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import { QuestionItem } from "./QuestionItem";
 import { formIntialState, formReducer } from "./formReducer";
 import styles from "./styles/AddQuestion.module.css";
@@ -12,11 +12,16 @@ export const AddQuestion = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (!formRef.current.checkValidity()) {
+      window.alert("Fill up all the required fields before submitting");
       setInvalidity(true);
     } else {
       setInvalidity(false);
       console.log(state);
     }
+  };
+
+  const setDate = (e) => {
+    dispatch({ type: "SET_DATE", value: e.target.value });
   };
 
   const addItem = (e) => {
@@ -25,7 +30,7 @@ export const AddQuestion = () => {
     dispatch({ type: "ADD" });
     setTimeout(() => {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }, 180);
+    }, 50);
   };
 
   const deleteLastItem = (e) => {
@@ -36,15 +41,11 @@ export const AddQuestion = () => {
     });
   };
 
-  useEffect(() => {
-    if (isInvalid)
-      window.alert("Fill up all the required fields before submitting");
-  }, [isInvalid]);
-
   return (
     <form className={styles.questions} ref={formRef}>
       <input
         type="date"
+        onChange={setDate}
         required
         className={`${styles.date} ${isInvalid ? styles.validity : ""}`}
       />

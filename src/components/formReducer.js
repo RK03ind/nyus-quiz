@@ -32,6 +32,13 @@ export const formReducer = (state, action) => {
       };
     }
 
+    case "SET_DATE": {
+      return {
+        ...state,
+        date: action.value,
+      };
+    }
+
     case "MODIFY_TEXT_FIELD": {
       questionList[action.index][action.field] = action.value;
       return {
