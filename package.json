@@ -1,0 +1,20 @@
+{
+  "name": "nyus-quiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd ./backend/ && npm install && node server.js",
+    "heroku-postbuild": "cd ./frontend/ && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RK03ind/nyus-quiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RK03ind/nyus-quiz/issues"
+  },
+  "homepage": "https://github.com/RK03ind/nyus-quiz#readme"
+}
