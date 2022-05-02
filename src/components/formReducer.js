@@ -32,16 +32,6 @@ export const formReducer = (state, action) => {
       };
     }
 
-    case "REMOVE_LAST": {
-      if (questionList.length !== 1) {
-        questionList.pop();
-      }
-      return {
-        ...state,
-        questions: questionList,
-      };
-    }
-
     case "MODIFY_TEXT_FIELD": {
       questionList[action.index][action.field] = action.value;
       return {
@@ -65,7 +55,7 @@ export const formReducer = (state, action) => {
       }
       return {
         ...state,
-        questions: questionList.filter((item) => item.id !== action.id),
+        questions: questionList.filter((item, index) => index !== action.index),
       };
     }
   }

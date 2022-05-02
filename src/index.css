@@ -13,17 +13,20 @@ body {
   background-color: #121212;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 * {
   box-sizing: border-box;
 }
 
 *::-webkit-scrollbar {
   display: none;
+}
+
+*::placeholder {
+  color: var(--placeholder-color);
+}
+
+*:focus-visible {
+  outline: none;
 }
 
 input {
@@ -40,12 +43,5 @@ button {
   border: 0px;
   border-radius: 8px;
   padding: 1em 0.95em;
-}
-
-*::placeholder {
-  color: var(--placeholder-color);
-}
-
-*:focus-visible {
-  outline: none;
+  font-size: 0.9em;
 }

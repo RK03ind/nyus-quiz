@@ -8,16 +8,14 @@ export const QuestionItem = (props) => {
       field: event.target.name,
       value: event.target.value,
     });
-    // props.dispatch({ type: "ADD" });
   };
 
   const deleteQuestion = (e) => {
     e.preventDefault();
-    props.dispatch({ type: "DELETE_ITEM", id: props.id });
+    props.dispatch({ type: "DELETE_ITEM", index: props.index });
   };
 
   const onOptionChange = (event, optionIndex) => {
-    console.log(optionIndex);
     props.dispatch({
       type: "MODIFY_OPTIONS",
       index: props.index,

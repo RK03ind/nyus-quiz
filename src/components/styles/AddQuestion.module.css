@@ -12,10 +12,32 @@
 }
 
 .date {
-  padding: 1.4em 0.8em;
+  padding: 0.8em;
   width: 45%;
 }
 
-.input:focus:invalid {
-  border: 2px solid red;
+.submit {
+  margin-top: 2em;
+  width: 87%;
+  background-color: #4caf50;
+  color: white;
+}
+
+.add__remove {
+  display: flex;
+  justify-content: space-between;
+  width: 87%;
+  flex-wrap: wrap;
+  margin-top: 2.4rem;
+}
+
+.add__remove > button {
+  width: 43%;
+
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.validity:invalid {
+  border: 1.6px solid rgb(255, 0, 0, 0.6);
 }

@@ -1,4 +1,4 @@
-import { useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { QuestionItem } from "./QuestionItem";
 import { formIntialState, formReducer } from "./formReducer";
 import styles from "./styles/AddQuestion.module.css";
@@ -6,7 +6,7 @@ import styles from "./styles/AddQuestion.module.css";
 export const AddQuestion = () => {
   const [isInvalid, setInvalidity] = useState(false);
   const [state, dispatch] = useReducer(formReducer, formIntialState);
-
+  const scrollRef = useRef();
   const formRef = useRef();
 
   const onSubmit = (e) => {
@@ -17,18 +17,40 @@ export const AddQuestion = () => {
       setInvalidity(false);
       console.log(state);
     }
-
-    // dispatch({ type: "ADD" });
   };
+
+  const addItem = (e) => {
+    e.preventDefault();
+    dispatch({ type: "ADD" });
+    setTimeout(() => {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }, 200);
+  };
+
+  const deleteLastItem = (e) => {
+    e.preventDefault();
+    dispatch({
+      type: "DELETE_ITEM",
+      index: state.questions.length - 1,
+    });
+  };
+
+  useEffect(() => {
+    if (isInvalid)
+      window.alert("Fill up all the required fields before submitting");
+  }, [isInvalid]);
 
   return (
     <form className={styles.questions} ref={formRef}>
-      <input type="date" required className={styles.date} />
+      <input
+        type="date"
+        required
+        className={`${styles.date} ${isInvalid ? styles.validity : ""}`}
+      />
       {state.questions.map((item, index) => {
         return (
           <QuestionItem
             key={item.id}
-            id={item.id}
             qNumber={index + 1}
             isInvalid={isInvalid}
             dispatch={dispatch}
@@ -36,7 +58,13 @@ export const AddQuestion = () => {
           />
         );
       })}
-      <button onClick={onSubmit}></button>
+      <div className={styles.add__remove} ref={scrollRef}>
+        <button onClick={addItem}>Add Question</button>
+        <button onClick={deleteLastItem}>Remove Last Question</button>
+      </div>
+      <button className={styles.submit} onClick={onSubmit}>
+        Submit
+      </button>
     </form>
   );
 };
