@@ -11,24 +11,21 @@ const getQuiz = async (req, res) => {
 };
 
 const addQuiz = async (req, res) => {
-  try {
-    const { date, questions } = req.body;
+  console.log("lmao");
+  const { date, questions } = req.body;
 
-    const quiz = questions.map(({ id, ...rest }) => {
-      return rest;
-    });
+  const quiz = questions.map(({ id, ...rest }) => {
+    return rest;
+  });
 
-    const createdQuiz = new Quiz({
-      date: date,
-      quiz: quiz,
-    });
+  const createdQuiz = new Quiz({
+    date: date,
+    quiz: quiz,
+  });
 
-    const result = await createdQuiz.save();
+  const result = await createdQuiz.save();
 
-    res.status(200).json({ id: result._id });
-  } catch {
-    res.status(500).json("Something went wrong :(");
-  }
+  res.status(200).json({ id: result._id });
 };
 
 module.exports = { getQuiz, addQuiz };

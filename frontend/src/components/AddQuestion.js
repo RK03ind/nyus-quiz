@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useReducer, useRef, useState } from "react";
 import { QuestionItem } from "./QuestionItem";
-import { formIntialState, formReducer } from "./formReducer";
+import { actionType, formIntialState, formReducer } from "./formReducer";
 import styles from "./styles/AddQuestion.module.css";
 import usePostData from "../hooks/usePostData";
 
@@ -25,13 +25,13 @@ export const AddQuestion = () => {
   };
 
   const setDate = (e) => {
-    dispatch({ type: "SET_DATE", value: e.target.value });
+    dispatch({ type: actionType.setDate, value: e.target.value });
   };
 
   const addItem = (e) => {
     e.preventDefault();
     setInvalidity(false);
-    dispatch({ type: "ADD" });
+    dispatch({ type: actionType.add });
     setTimeout(() => {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
     }, 50);
@@ -40,7 +40,7 @@ export const AddQuestion = () => {
   const deleteLastItem = (e) => {
     e.preventDefault();
     dispatch({
-      type: "DELETE_ITEM",
+      type: actionType.delete,
       index: state.questions.length - 1,
     });
   };
@@ -50,6 +50,7 @@ export const AddQuestion = () => {
       window.alert(
         `The quiz is successfully stored with id:  ${postQuizData.data.data.id}`
       );
+      dispatch({ type: actionType.reset });
     }
   }, [postQuizData.isSuccess]);
 
@@ -63,6 +64,7 @@ export const AddQuestion = () => {
     <form className={styles.questions} ref={formRef}>
       <input
         type="date"
+        value={state.date}
         onChange={setDate}
         required
         className={`${styles.date} ${isInvalid ? styles.validity : ""}`}

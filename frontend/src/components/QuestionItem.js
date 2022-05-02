@@ -1,9 +1,10 @@
+import { actionType } from "./formReducer";
 import styles from "./styles/QuestionItem.module.css";
 
 export const QuestionItem = (props) => {
   const onTextInputChange = (event) => {
     props.dispatch({
-      type: "MODIFY_TEXT_FIELD",
+      type: actionType.modifyTextField,
       index: props.index,
       field: event.target.name,
       value: event.target.value,
@@ -12,12 +13,12 @@ export const QuestionItem = (props) => {
 
   const deleteQuestion = (e) => {
     e.preventDefault();
-    props.dispatch({ type: "DELETE_ITEM", index: props.index });
+    props.dispatch({ type: actionType.delete, index: props.index });
   };
 
   const onOptionChange = (event, optionIndex) => {
     props.dispatch({
-      type: "MODIFY_OPTIONS",
+      type: actionType.modifyOptions,
       index: props.index,
       optionIndex: optionIndex,
       value: event.target.value,
