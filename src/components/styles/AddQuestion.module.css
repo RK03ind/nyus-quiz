@@ -12,12 +12,13 @@
 }
 
 .date {
+  min-height: 2.85em;
   padding: 0.8em;
   width: 45%;
 }
 
 .submit {
-  margin-top: 2em;
+  margin-top: 1.8em;
   width: 87%;
   background-color: #4caf50;
   color: white;
@@ -28,7 +29,7 @@
   justify-content: space-between;
   width: 87%;
   flex-wrap: wrap;
-  margin-top: 2.4rem;
+  margin-top: 2.2rem;
 }
 
 .add__remove > button {

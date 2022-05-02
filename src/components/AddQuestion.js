@@ -21,10 +21,11 @@ export const AddQuestion = () => {
 
   const addItem = (e) => {
     e.preventDefault();
+    setInvalidity(false);
     dispatch({ type: "ADD" });
     setTimeout(() => {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }, 200);
+    }, 180);
   };
 
   const deleteLastItem = (e) => {
