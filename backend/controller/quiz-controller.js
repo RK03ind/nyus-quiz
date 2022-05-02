@@ -26,7 +26,7 @@ const addQuiz = async (req, res) => {
     const result = await createdQuiz.save();
 
     res.status(200).json({ id: result._id });
-  } catch (err) {
+  } catch {
     res.status(500).json("Something went wrong :(");
   }
 };
