@@ -83,7 +83,7 @@ export const AddQuestion = () => {
         <button onClick={deleteLastItem}>Remove Last Question</button>
       </div>
       <button className={styles.submit} onClick={onSubmit}>
-        Submit
+        {postQuizData.isLoading ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
