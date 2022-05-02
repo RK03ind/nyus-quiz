@@ -6,7 +6,7 @@ const getQuiz = async (req, res) => {
     if (quiz) return res.json(quiz);
     res.status(404).json("Quiz not found");
   } catch {
-    res.status(500).json("Something went wrong :(");
+    res.status(500).json("Internal Server Error or Invalid id");
   }
 };
 
@@ -26,7 +26,7 @@ const addQuiz = async (req, res) => {
     const result = await createdQuiz.save();
 
     res.status(200).json({ id: result._id });
-  } catch {
+  } catch (err) {
     res.status(500).json("Something went wrong :(");
   }
 };

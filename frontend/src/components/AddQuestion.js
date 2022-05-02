@@ -53,6 +53,12 @@ export const AddQuestion = () => {
     }
   }, [postQuizData.isSuccess]);
 
+  useEffect(() => {
+    if (postQuizData.isError) {
+      window.alert("Something went wrong :(");
+    }
+  }, [postQuizData.isError]);
+
   return (
     <form className={styles.questions} ref={formRef}>
       <input
