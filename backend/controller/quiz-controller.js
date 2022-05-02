@@ -11,7 +11,7 @@ const getQuiz = async (req, res) => {
 };
 
 const addQuiz = async (req, res) => {
-  console.log("lmao");
+  try{
   const { date, questions } = req.body;
 
   const quiz = questions.map(({ id, ...rest }) => {
@@ -26,6 +26,9 @@ const addQuiz = async (req, res) => {
   const result = await createdQuiz.save();
 
   res.status(200).json({ id: result._id });
+}catch{
+res.status(500).json("Something Went Wrong :(");
+}
 };
 
 module.exports = { getQuiz, addQuiz };
