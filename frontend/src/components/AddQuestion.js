@@ -1,11 +1,15 @@
-import { useReducer, useRef, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useReducer, useRef, useState } from "react";
 import { QuestionItem } from "./QuestionItem";
 import { formIntialState, formReducer } from "./formReducer";
 import styles from "./styles/AddQuestion.module.css";
+import usePostData from "../hooks/usePostData";
 
 export const AddQuestion = () => {
   const [isInvalid, setInvalidity] = useState(false);
   const [state, dispatch] = useReducer(formReducer, formIntialState);
+  const postQuizData = usePostData("/api/quiz");
+
   const scrollRef = useRef();
   const formRef = useRef();
 
@@ -16,7 +20,7 @@ export const AddQuestion = () => {
       setInvalidity(true);
     } else {
       setInvalidity(false);
-      console.log(state);
+      postQuizData.mutate(state);
     }
   };
 
@@ -40,6 +44,14 @@ export const AddQuestion = () => {
       index: state.questions.length - 1,
     });
   };
+
+  useEffect(() => {
+    if (postQuizData.isSuccess) {
+      window.alert(
+        `The quiz is successfully stored with id:  ${postQuizData.data.data.id}`
+      );
+    }
+  }, [postQuizData.isSuccess]);
 
   return (
     <form className={styles.questions} ref={formRef}>

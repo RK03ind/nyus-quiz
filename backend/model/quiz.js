@@ -7,15 +7,16 @@ const quizSchema = new mongoose.Schema({
       options: [
         {
           value: { type: String, required: true },
-          opted_by: { type: Number, required: true, default: 0 },
+          opted_by: { type: Number, required: false, default: 0 },
+          _id: false,
         },
       ],
       answer: { type: Number, required: true },
-      answered_by: { type: Number, required: true, default: 0 },
+      answered_by: { type: Number, required: false, default: 0 },
       question: { type: String, required: true },
-      hint: { type: String, required: true, default: "" },
+      hint: { type: String, required: false, default: "" },
     },
   ],
 });
 
-module.exports = mongoose.model("quiz", quizSchema);
+module.exports = mongoose.model("quiz", quizSchema, "quiz");
